@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 class ValidateEmailAlert extends Component {
   static contextTypes = {
@@ -47,9 +47,9 @@ class ValidateEmailAlert extends Component {
       return (
         <div className="container">
           <div className="alert alert-danger">
-            {this.getAlertMessage()}       
+            {this.getAlertMessage()}
             <a style={{paddingLeft:'20px'}} onClick={this.props.resend} href="javascript:void(0)">Resend</a>
-            <Link style={{paddingLeft:'20px'}} to='/profile'>Update Email</Link> 
+            <Link style={{paddingLeft:'20px'}} to='/profile'>Update Email</Link>
             </div>
           </div>
         );

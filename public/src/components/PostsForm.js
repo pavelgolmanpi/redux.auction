@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import renderField from './renderField';
 import renderTextArea from './renderTextArea';

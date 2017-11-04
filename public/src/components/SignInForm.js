@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import renderField from './renderField';
 import { signInUser, signInUserSuccess, signInUserFailure, resetUserFields } from '../actions/users';
@@ -30,7 +30,7 @@ const validateAndSignInUser = (values, dispatch) => {
         throw new SubmissionError(result.payload.response.data);
       }
 
-      //Store JWT Token to browser session storage 
+      //Store JWT Token to browser session storage
       //If you use localStorage instead of sessionStorage, then this w/ persisted across tabs and new windows.
       //sessionStorage = persisted only in current tab
       sessionStorage.setItem('jwtToken', result.payload.data.token);
@@ -102,4 +102,3 @@ export default reduxForm({
   form: 'SignInForm', // a unique identifier for this form
   validate // <--- validation function given to redux-form
 })(SignInForm)
-

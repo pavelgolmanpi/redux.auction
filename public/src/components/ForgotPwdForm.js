@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { forgotPwd, forgotPwdSuccess, forgotPwdFailure, resetUserFields } from '../actions/users';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';

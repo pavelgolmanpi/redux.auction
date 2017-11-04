@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 class PostsList extends Component {
   componentWillMount() {
@@ -32,14 +32,14 @@ class PostsList extends Component {
     const { posts, loading, error } = this.props.postsList;
 
     if(loading) {
-      return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>      
+      return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>
     } else if(error) {
       return <div className="alert alert-danger">Error: {error.message}</div>
     }
 
     return (
       <div className="container">
-        <h1>Posts</h1>
+        <h3>Posts DDDDDD</h3>
         <ul className="list-group">
           {this.renderPosts(posts)}
         </ul>

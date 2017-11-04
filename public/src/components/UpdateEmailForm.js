@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { updateEmail, updateEmailSuccess, updateEmailFailure } from '../actions/updateEmail';
 import { validateUserFields, validateUserFieldsSuccess, validateUserFieldsFailure } from '../actions/validateUserFields';
 import renderField from './renderField';
@@ -53,7 +53,7 @@ const validateAndUpdateEmail = (values, dispatch) => {
         dispatch(updateEmailFailure(result.payload.response.data));
         throw new SubmissionError(result.payload.response.data);
       }
-      //let other components know that we got user and things are fine by updating the redux` state 
+      //let other components know that we got user and things are fine by updating the redux` state
       dispatch(updateEmailSuccess(result.payload.data));
       dispatch(updateUserEmail(values)); //update current user's email (in user's state)
     });
