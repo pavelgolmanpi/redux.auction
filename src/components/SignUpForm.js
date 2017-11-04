@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import renderField from './renderField';
 import { validateUserFields, validateUserFieldsSuccess, validateUserFieldsFailure, resetValidateUserFields } from '../actions/validateUserFields';
@@ -105,7 +105,6 @@ class SignUpForm extends Component {
   }
 
   render() {
-    debugger;
     const {asyncValidating, handleSubmit, submitting, asyncValidate, validate} = this.props;
     return (
       <div className='container'>
