@@ -1,0 +1,23 @@
+{
+  "name": "React Redux Auction app",
+  "description": "A sample Auction app",
+  "repository": "https://github.com/pavelgolmanpi/redux.auction",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "React", "React.js", "React", "Redux", "JavaScript", "MongoDB", "jwt"],
+  "image": "heroku/nodejs",
+  "env": {
+  	"NODE_ENV": {
+  		"description": "Node environment",
+  		"value": "production"
+  	},
+    "JWT_SECRET": {
+      "description": "sfsdfsdfsdfsdf",
+      "value":""
+    },
+    "FROM_EMAIL": {
+      "description": "pavel.golman@postindustria.com",
+      "value":""
+    }
+  },
+  "addons": ["mongolab", "postmark:10k"]
+}
