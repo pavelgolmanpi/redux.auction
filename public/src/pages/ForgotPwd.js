@@ -6,7 +6,7 @@ class ForgotPwd extends Component {
   render() {
     return (
       <div>
-        <HeaderContainer type="posts_new"/>
+        <HeaderContainer type="products_new"/>
         <ForgotPwdFormContainer />
       </div>
     );

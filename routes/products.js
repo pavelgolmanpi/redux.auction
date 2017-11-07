@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var expressJwt = require('express-jwt');
 
-
 var productSchema = mongoose.Schema({
   title: String,
   categories: [String],
@@ -51,11 +50,12 @@ router.post('/products', function(req, res, next) {
     return res.status(401).json({
       message: 'Permission Denied!'
     });
-  } else if (!user.isEmailVerified) {
-    return res.status(401).json({
-      message: 'Permission Denied! Please verify your email.'
-    });
   }
+  //else if (!user.isEmailVerified) {
+  //  return res.status(401).json({
+  //    message: 'Permission Denied! Please verify your email.'
+  //  });
+  //}
 
   console.dir(req.user);
 

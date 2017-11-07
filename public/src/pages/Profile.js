@@ -7,7 +7,7 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <HeaderContainer type="posts_new"/>
+        <HeaderContainer type="products_new"/>
         <div className="container">
         	<h2>Profile</h2>
 
@@ -17,7 +17,7 @@ class Profile extends Component {
         	<div className='well'>
         		<UpdateEmailFormContainer />
         	</div>
-        	
+
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ class ValidateEmailAlert extends Component {
   componentWillReceiveProps(nextProps) {
     //if user is authenticated, then reroute the user to PostsList as authenticated user
     if(nextProps.user && nextProps.user.status === 'authenticated' && nextProps.user.user && !nextProps.user.error) {
-      this.context.router.push('/');
+      this.context.router.history.push('/');
     }
   }
 
@@ -34,9 +34,10 @@ class ValidateEmailAlert extends Component {
     } else if(this.props.user.user && !this.props.user.user.isEmailVerified) {
       if(this.props.resendEmail.sentAgain) {//if the user has pressed the 'resend' button
         return 'Resent Email. Please verify';
-      } else {
-        return 'Please verify email';
       }
+      //else {
+      //  return 'Please verify email';
+      //}
     }
   }
 

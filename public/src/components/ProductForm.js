@@ -76,7 +76,7 @@ class ProductsForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.newProduct.product && !nextProps.newProduct.error) {
-      this.context.router.push('/');
+      this.context.router.history.push('/');
     }
   }
 

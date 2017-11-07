@@ -10,15 +10,15 @@ class ProductsShow extends Component {
   };
 
   onDeleteClick() {
-    this.props.deleteProduct(this.props.params.id)
-      .then(() => { this.context.router.push('/'); });
+    this.props.deleteProduct(this.props.match.params.id)
+      .then(() => { this.context.router.history.push('/'); });
   }
 
   render() {
     return (
       <div className='container'>
-        <Header type="products_show" productId={this.props.params.id}/>
-        <ProductDetailsContainer id={this.props.params.id}/>
+        <Header type="products_show" productId={this.props.match.params.id}/>
+        <ProductDetailsContainer id={this.props.match.params.id}/>
       </div>
     );
   }

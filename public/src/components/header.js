@@ -17,9 +17,9 @@ class Header extends Component {
     if(nextProps.deletedProduct.error && nextProps.deletedProduct.error.message) {//delete failure
       alert(nextProps.deletedProduct.error.message || 'Could not delete. Please try again.');
     } else if(nextProps.deletedProduct.product && !nextProps.deletedProduct.error) {//delete success
-      this.context.router.push('/');
+      this.context.router.history.push('/');
     } else if(this.props.user.user && !nextProps.user.user) {//logout (had user(this.props.user.user) but no loger the case (!nextProps.user.user))
-      this.context.router.push('/');
+      this.context.router.history.push('/');
     }
   }
 

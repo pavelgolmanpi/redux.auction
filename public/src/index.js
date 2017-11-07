@@ -24,8 +24,8 @@ ReactDOM.render(
     <Switch>
 
     <Route exact path="/" component={ProductsIndex} />
-      <Route exact path="products/new" component={ProductsNew} />
-      <Route exact path="products/:id" component={ProductsShow} />
+      <Route exact path="/products/new" component={ProductsNew} />
+      <Route  path="/products/:id" component={ProductsShow} />
       <Route exact path="/signin" component={SignIn} />
       <Route pexact ath="/signup" component={SignUp} />
       <Route exact path="/forgotPwd" component={ForgotPwd} />
