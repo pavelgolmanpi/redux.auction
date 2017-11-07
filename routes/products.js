@@ -5,7 +5,7 @@ var timestamps = require('mongoose-timestamp');
 var expressJwt = require('express-jwt');
 
 
-var postSchema = mongoose.Schema({
+var productSchema = mongoose.Schema({
   title: String,
   categories: [String],
   content: String,
@@ -14,14 +14,14 @@ var postSchema = mongoose.Schema({
   authorId: String
 });
 
-postSchema.plugin(timestamps);
+productSchema.plugin(timestamps);
 
-var Post = mongoose.model('Post', postSchema);
+var Product = mongoose.model('Product', productSchema);
 
 
 
-router.get('/posts', function(req, res, next) {
-  Post
+router.get('/products', function(req, res, next) {
+  Product
     .find({})
     .select({
       content: 0,
@@ -33,19 +33,19 @@ router.get('/posts', function(req, res, next) {
     .sort({
       createdAt: -1
     })
-    .exec(function(err, posts) {
+    .exec(function(err, products) {
       if (err) {
         console.log(err);
         return res.status(500).json({
-          message: 'Could not retrieve posts'
+          message: 'Could not retrieve products'
         });
       }
-      res.json(posts);
+      res.json(products);
     });
 
 });
 
-router.post('/posts', function(req, res, next) {
+router.post('/products', function(req, res, next) {
   var user = req.user;
   if (!user) {
     return res.status(401).json({
@@ -65,7 +65,7 @@ router.post('/posts', function(req, res, next) {
   var content = body.content;
 
   //simulate error if title, categories and content are all "test"
-  //This is demo field-validation error upon submission. 
+  //This is demo field-validation error upon submission.
   if (title === 'test' && categories === 'test' && content === 'test') {
     return res.status(403).json({
       message: {
@@ -83,7 +83,7 @@ router.post('/posts', function(req, res, next) {
     });
   }
 
-  var post = new Post({
+  var product = new Product({
     title: title,
     categories: categories.split(','),
     content: content,
@@ -94,37 +94,37 @@ router.post('/posts', function(req, res, next) {
   });
 
 
-  post.save(function(err, post) {
+  product.save(function(err, product) {
     if (err) {
       console.log(err);
       return res.status(500).json({
-        message: 'Could not save post'
+        message: 'Could not save product'
       });
     }
-    res.json(post);
+    res.json(product);
   });
 });
 
-router.get('/posts/:id', function(req, res, next) {
-  Post.findById({
+router.get('/products/:id', function(req, res, next) {
+  Product.findById({
     '_id': req.params.id
-  }, function(err, post) {
+  }, function(err, product) {
     if (err) {
       console.log(err);
       return res.status(500).json({
-        message: 'Could not retrieve post w/ that id'
+        message: 'Could not retrieve product w/ that id'
       });
     }
-    if (!post) {
+    if (!product) {
       return res.status(404).json({
-        message: 'Post not found'
+        message: 'Product not found'
       })
     }
-    res.json(post);
+    res.json(product);
   });
 });
 
-router.delete('/posts/:id', function(req, res, next) {
+router.delete('/products/:id', function(req, res, next) {
   if (!req.user || !req.user.isEmailVerified) {
     return res.status(401).json({
       message: 'Permission Denied!'
@@ -138,37 +138,37 @@ router.delete('/posts/:id', function(req, res, next) {
     });
   }
   var id = mongoose.Types.ObjectId(req.params.id); //convert to objectid
-  Post.findByIdAndRemove(id, function(err, post) {
+  Product.findByIdAndRemove(id, function(err, product) {
     if (err)
       throw err;
 
-    if (!post) {
+    if (!product) {
       return res.status(404).json({
-        message: 'Could not delete post'
+        message: 'Could not delete product'
       });
     }
 
     res.json({
-      result: 'Post was deleted'
+      result: 'Product was deleted'
     });
 
   });
 });
 
-router.post('/posts/validate/fields', function(req, res, next) {
+router.post('/products/validate/fields', function(req, res, next) {
   var body = req.body;
   var title = body.title ? body.title.trim() : '';
 
-  Post.findOne({
+  Product.findOne({
     'title': new RegExp(title, "i")
-  }, function(err, post) {
+  }, function(err, product) {
     if (err) {
       console.log(err);
       return res.status(500).json({
-        message: 'Could not find post for title uniqueness'
+        message: 'Could not find product for title uniqueness'
       });
     }
-    if (post) {
+    if (product) {
       res.json({
         title: 'Title "' + title + '" is not unique!'
       });

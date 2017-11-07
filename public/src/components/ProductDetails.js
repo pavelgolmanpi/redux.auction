@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
-class PostDetails extends Component {
+class ProductDetails extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
@@ -13,27 +13,27 @@ class PostDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchPost(this.props.postId);
+    this.props.fetchProduct(this.props.productId);
   }
 
   render() {
-    const { post, loading, error } = this.props.activePost;
+    const { product, loading, error } = this.props.activeProduct;
     if (loading) {
       return <div className="container">Loading...</div>;
     } else if(error) {
       return  <div className="alert alert-danger">{error.message}</div>
-    } else if(!post) {
+    } else if(!product) {
       return <span />
     }
 
     return (
       <div className="container">
-        <h3>{post.title}</h3>
-        <h6>Categories: {post.categories}</h6>
-        <p>{post.content}</p>
+        <h3>{product.title}</h3>
+        <h6>Categories: {product.categories}</h6>
+        <p>{product.content}</p>
       </div>
     );
   }
 }
 
-export default PostDetails;
+export default ProductDetails;

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import HeaderContainer from '../containers/HeaderContainer.js';
 import ValidateEmailAlertContainer from '../containers/ValidateEmailAlertContainer.js';
-import PostsList from '../containers/PostsListContainer.js';
+import ProductsList from '../containers/ProductsListContainer.js';
 
-class PostsIndex extends Component {
+class ProductsIndex extends Component {
   render() {
     return (
       <div>
-        <HeaderContainer type="posts_index"/>
+        <HeaderContainer type="products_index"/>
         <ValidateEmailAlertContainer/>
-        <PostsList />
+        <ProductsList />
       </div>
     );
   }
 }
 
 
-export default PostsIndex;
+export default ProductsIndex;

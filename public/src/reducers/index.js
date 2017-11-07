@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import PostsReducer from './reducer_posts';
+import ProductsReducer from './reducer_products';
 import UserReducer from './reducer_user';
 import ValidateUserFieldsReducer from './reducer_validateUserFields';
 import ResendEmailReducer from './reducer_resendEmail';
@@ -9,7 +9,7 @@ import { reducer as formReducer } from 'redux-form';
 const rootReducer = combineReducers({
   user: UserReducer,
   validateFields: ValidateUserFieldsReducer,
-  posts: PostsReducer, //<-- Posts
+  products: ProductsReducer, //<-- Products
   form: formReducer, // <-- redux-form
   resendEmail: ResendEmailReducer,
   updateEmail: UpdateEmailReducer

@@ -11,7 +11,7 @@ var jwt = require('jsonwebtoken');
 
 //routes
 var users = require('./routes/users');
-var posts = require('./routes/posts');
+var products = require('./routes/products');
 
 var app = express();
 
@@ -61,7 +61,7 @@ app.use(function(req, res, next) {
     if (err) {
       return res.status(401).json({
         success: false,
-        message: 'Please register Log in using a valid email to submit posts'
+        message: 'Please register Log in using a valid email to submit products'
       });
     } else {
       req.user = user;
@@ -72,11 +72,11 @@ app.use(function(req, res, next) {
 });
 
 
-app.use('/api/', posts);
+app.use('/api/', products);
 app.use('/api/', users);
 app.use(express.static(staticPath));
 app.use('/', express.static(staticPath));
-app.use('/posts/*', express.static(staticPath));
+app.use('/products/*', express.static(staticPath));
 app.use('/new/*', express.static(staticPath));
 app.use('/validateEmail/*', express.static(staticPath));
 
@@ -118,7 +118,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/posts');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/products');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

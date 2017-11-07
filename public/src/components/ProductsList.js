@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class PostsList extends Component {
+class ProductsList extends Component {
   componentWillMount() {
-    this.props.fetchPosts();
+    this.props.fetchProducts();
   }
 
   renderCategories(categories) {
@@ -15,33 +15,33 @@ class PostsList extends Component {
      });
   }
 
-  renderPosts(posts) {
-    return posts.map((post) => {
+  renderProducts(products) {
+    return products.map((product) => {
       return (
-        <li className="list-group-item" key={post._id}>
-          <Link style={{color:'black'}} to={"posts/" + post._id}>
-            <h3 className="list-group-item-heading">{post.title}</h3>
+        <li className="list-group-item" key={product._id}>
+          <Link style={{color:'black'}} to={"products/" + product._id}>
+            <h3 className="list-group-item-heading">{product.title}</h3>
           </Link>
-            {this.renderCategories(post.categories)}
+            {this.renderCategories(product.categories)}
         </li>
       );
     });
   }
 
   render() {
-    const { posts, loading, error } = this.props.postsList;
+    const { products, loading, error } = this.props.productsList;
 
     if(loading) {
-      return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>
+      return <div className="container"><h1>Products</h1><h3>Loading...</h3></div>
     } else if(error) {
       return <div className="alert alert-danger">Error: {error.message}</div>
     }
 
     return (
       <div className="container">
-        <h3>Posts DDDDDD</h3>
+        <h3>Products</h3>
         <ul className="list-group">
-          {this.renderPosts(posts)}
+          {this.renderProducts(products)}
         </ul>
       </div>
     );
@@ -49,4 +49,4 @@ class PostsList extends Component {
 }
 
 
-export default PostsList;
+export default ProductsList;

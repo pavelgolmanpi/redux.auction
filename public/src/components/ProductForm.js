@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import renderField from './renderField';
 import renderTextArea from './renderTextArea';
-import { validatePostFields, validatePostFieldsSuccess, validatePostFieldsFailure } from '../actions/posts';
-import { createPost, createPostSuccess, createPostFailure, resetNewPost } from '../actions/posts';
+import { validateProductFields, validateProductFieldsSuccess, validateProductFieldsFailure } from '../actions/products';
+import { createProduct, createProductSuccess, createProductFailure, resetNewProduct } from '../actions/products';
 
 //Client side validation
 function validate(values) {
@@ -25,7 +25,7 @@ function validate(values) {
 
 //For instant async server validation
 const asyncValidate = (values, dispatch) => {
-  return dispatch(validatePostFields(values))
+  return dispatch(validateProductFields(values))
     .then((result) => {
       //Note: Error's "data" is in result.payload.response.data
       // success's "data" is in result.payload.data
@@ -37,33 +37,33 @@ const asyncValidate = (values, dispatch) => {
       //if status is not 200 or any one of the fields exist, then there is a field error
       if (response.payload.status != 200 || data.title || data.categories || data.description) {
         //let other components know of error by updating the redux` state
-        dispatch(validatePostFieldsFailure(data));
+        dispatch(validateProductFieldsFailure(data));
         throw data; //throw error
       } else {
         //let other components know that everything is fine by updating the redux` state
-        dispatch(validatePostFieldsSuccess(data)); //ps: this is same as dispatching RESET_USER_FIELDS
+        dispatch(validateProductFieldsSuccess(data)); //ps: this is same as dispatching RESET_USER_FIELDS
       }
     });
 };
 
 //For any field errors upon submission (i.e. not instant check)
-const validateAndCreatePost = (values, dispatch) => {
-  return dispatch(createPost(values, sessionStorage.getItem('jwtToken')))
+const validateAndCreateProduct = (values, dispatch) => {
+  return dispatch(createProduct(values, sessionStorage.getItem('jwtToken')))
     .then(result => {
       // Note: Error's "data" is in result.payload.response.data (inside "response")
       // success's "data" is in result.payload.data
       if (result.payload.response && result.payload.response.status !== 200) {
-        dispatch(createPostFailure(result.payload.response.data));
+        dispatch(createProductFailure(result.payload.response.data));
         throw new SubmissionError(result.payload.response.data);
       }
       //let other components know that everything is fine by updating the redux` state
-      dispatch(createPostSuccess(result.payload.data)); //ps: this is same as dispatching RESET_USER_FIELDS
+      dispatch(createProductSuccess(result.payload.data)); //ps: this is same as dispatching RESET_USER_FIELDS
     });
 }
 
 
 
-class PostsForm extends Component {
+class ProductsForm extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
@@ -75,16 +75,16 @@ class PostsForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.newPost.post && !nextProps.newPost.error) {
+    if (nextProps.newProduct.product && !nextProps.newProduct.error) {
       this.context.router.push('/');
     }
   }
 
-  renderError(newPost) {
-    if (newPost && newPost.error && newPost.error.message) {
+  renderError(newProduct) {
+    if (newProduct && newProduct.error && newProduct.error.message) {
       return (
         <div className="alert alert-danger">
-          { newPost ? newPost.error.message : '' }
+          { newProduct ? newProduct.error.message : '' }
         </div>
         );
     } else {
@@ -92,11 +92,11 @@ class PostsForm extends Component {
     }
   }
   render() {
-    const {handleSubmit, submitting, newPost} = this.props;
+    const {handleSubmit, submitting, newProduct} = this.props;
     return (
       <div className='container'>
-        { this.renderError(newPost) }
-        <form onSubmit={ handleSubmit(validateAndCreatePost) }>
+        { this.renderError(newProduct) }
+        <form onSubmit={ handleSubmit(validateAndCreateProduct) }>
           <Field
                  name="title"
                  type="text"
@@ -131,7 +131,7 @@ class PostsForm extends Component {
 
 
 export default reduxForm({
-  form: 'PostsForm', // a unique identifier for this form
+  form: 'ProductsForm', // a unique identifier for this form
   validate, // <--- validation function given to redux-form
   asyncValidate
-})(PostsForm)
+})(ProductsForm)

@@ -7,9 +7,9 @@ import configureStore from './store/configureStore.js';
 
 
 import App from './pages/App';
-import PostsIndex from './pages/PostsIndex';
-import PostsNew from './pages/PostsNew';
-import PostsShow from './pages/PostsShow';
+import ProductsIndex from './pages/ProductsIndex';
+import ProductsNew from './pages/ProductsNew';
+import ProductsShow from './pages/ProductsShow';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPwd from './pages/ForgotPwd';
@@ -23,9 +23,9 @@ ReactDOM.render(
     <BrowserRouter history={browserHistory}>
     <Switch>
 
-    <Route exact path="/" component={PostsIndex} />
-      <Route exact path="posts/new" component={PostsNew} />
-      <Route exact path="posts/:id" component={PostsShow} />
+    <Route exact path="/" component={ProductsIndex} />
+      <Route exact path="products/new" component={ProductsNew} />
+      <Route exact path="products/:id" component={ProductsShow} />
       <Route exact path="/signin" component={SignIn} />
       <Route pexact ath="/signup" component={SignUp} />
       <Route exact path="/forgotPwd" component={ForgotPwd} />

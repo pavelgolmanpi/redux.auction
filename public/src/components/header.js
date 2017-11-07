@@ -14,9 +14,9 @@ class Header extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.deletedPost.error && nextProps.deletedPost.error.message) {//delete failure
-      alert(nextProps.deletedPost.error.message || 'Could not delete. Please try again.');
-    } else if(nextProps.deletedPost.post && !nextProps.deletedPost.error) {//delete success
+    if(nextProps.deletedProduct.error && nextProps.deletedProduct.error.message) {//delete failure
+      alert(nextProps.deletedProduct.error.message || 'Could not delete. Please try again.');
+    } else if(nextProps.deletedProduct.product && !nextProps.deletedProduct.error) {//delete success
       this.context.router.push('/');
     } else if(this.props.user.user && !nextProps.user.user) {//logout (had user(this.props.user.user) but no loger the case (!nextProps.user.user))
       this.context.router.push('/');
@@ -59,13 +59,13 @@ class Header extends Component {
 
 	renderLinks() {
 		const { type, authenticatedUser } = this.props;
-		if(type === 'posts_index') {
+		if(type === 'products_index') {
        return (
         <div className="container">
           <ul className="nav  nav-pills navbar-right">
       			<li style={{paddingRight: '10px'}} role="presentation">
-      				<Link style={{color:'#337ab7',  fontSize: '17px'}} to="/posts/new">
-      				New Post
+      				<Link style={{color:'#337ab7',  fontSize: '17px'}} to="/products/new">
+      				New Product
     					</Link>
             </li>
     			</ul>
@@ -73,7 +73,7 @@ class Header extends Component {
 
         </div>
   		 );
-  	} else if(type === 'posts_new') {
+  	} else if(type === 'products_new') {
        return (
         <div className="container">
           {this.renderSignInLinks(authenticatedUser)}
@@ -84,7 +84,7 @@ class Header extends Component {
     			</ul>
         </div>
   		 );
-  	} else if(type === 'posts_show') {
+  	} else if(type === 'products_show') {
   			return (
   			 <div className="container">
     			<ul className="nav  nav-pills navbar-left">
@@ -92,7 +92,7 @@ class Header extends Component {
     			</ul>
 
     			<div className="navbar-form navbar-right" style={{paddingRight: '50px'}}>
-      			<button className="btn btn-warning pull-xs-right"  onClick={()=> {this.props.onDeleteClick()}}>Delete Post</button>
+      			<button className="btn btn-warning pull-xs-right"  onClick={()=> {this.props.onDeleteClick()}}>Delete Product</button>
       		</div>
            {this.renderSignInLinks(authenticatedUser)}
     	   </div>

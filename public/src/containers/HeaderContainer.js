@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts, resetDeletedPost, deletePost, deletePostSuccess, deletePostFailure } from '../actions/posts';
+import { fetchProducts, resetDeletedProduct, deleteProduct, deleteProductSuccess, deleteProductFailure } from '../actions/products';
 import { logoutUser } from '../actions/users';
 import Header from '../components/header.js';
 
 
 
 function mapStateToProps(state) {
-  return { 
-    deletedPost: state.posts.deletedPost,
+  return {
+    deletedProduct: state.products.deletedProduct,
     authenticatedUser: state.user.status === 'authenticated' ? state.user.user : null,
     user: state.user
   };
@@ -20,17 +20,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       let token = sessionStorage.getItem('jwtToken');
       if (!token || token === '') { //if there is no token, dont bother,
           let data = {data: {message: 'Please Sign In'}};//axios like error
-          dispatch(deletePostFailure(data)); // but let other comps know
+          dispatch(deleteProductFailure(data)); // but let other comps know
           return;
       }
 
-    	dispatch(deletePost(ownProps.postId, token))
+    	dispatch(deleteProduct(ownProps.productId, token))
       	.then((response) => {
-            !response.error ? dispatch(deletePostSuccess(response.payload)) : dispatch(deletePostFailure(response.payload));
+            !response.error ? dispatch(deleteProductSuccess(response.payload)) : dispatch(deleteProductFailure(response.payload));
           });
   	 },
      resetMe: () =>{
-        dispatch(resetDeletedPost());
+        dispatch(resetDeletedProduct());
      },
 
      logout: () => {
