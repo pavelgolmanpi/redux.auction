@@ -1,18 +1,21 @@
-import ProductDetails from '../components/ProductDetails.js';
-import { fetchProduct, fetchProductSuccess, fetchProductFailure, resetActiveProduct, resetDeletedProduct } from '../actions/products';
+import PlaceBidForm from '../components/PlaceBidForm.js';
 import { connect } from 'react-redux';
+
 
 function mapStateToProps(globalState, ownProps) {
   return {
+    newBid: globalState.placeBid.newBid,
     activeProduct: globalState.products.activeProduct,
-    productId: ownProps.id
+    productId: globalState.products.activeProduct.product._id,
+    initialValues: {productId: globalState.products.activeProduct.product._id}
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProduct: (id) => {
-      dispatch(fetchProduct(id))
+/*
+      dispatch(fetchBids(id))
         .then((result) => {
           // Note: Error's "data" is in result.payload.response.data (inside "response")
           // success's "data" is in result.payload.data
@@ -22,14 +25,14 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(fetchProductSuccess(result.payload.data))
           }
         })
+        */
     },
     resetMe: () => {
       //clean up both activeProduct(currrently open) and deletedProduct(open and being deleted) states
-      dispatch(resetActiveProduct());
-      dispatch(resetDeletedProduct());
+      dispatch(resetPlaceBidState());
+      //dispatch(resetDeletedBid());
     }
   }
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceBidForm);

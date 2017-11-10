@@ -12,6 +12,7 @@ var jwt = require('jsonwebtoken');
 //routes
 var users = require('./routes/users');
 var products = require('./routes/products');
+var bids = require('./routes/bids');
 
 var app = express();
 
@@ -64,6 +65,7 @@ app.use(function(req, res, next) {
         message: 'Please register Log in using a valid email to submit products'
       });
     } else {
+      //Assign current user to request parameter
       req.user = user;
       next();
     }
@@ -74,6 +76,7 @@ app.use(function(req, res, next) {
 
 app.use('/api/', products);
 app.use('/api/', users);
+app.use('/api/', bids);
 app.use(express.static(staticPath));
 app.use('/', express.static(staticPath));
 app.use('/products/*', express.static(staticPath));

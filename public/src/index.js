@@ -24,13 +24,14 @@ ReactDOM.render(
     <Switch>
 
     <Route exact path="/" component={ProductsIndex} />
+      <Route path="/profile" component={Profile} />
       <Route exact path="/products/new" component={ProductsNew} />
       <Route  path="/products/:id" component={ProductsShow} />
       <Route exact path="/signin" component={SignIn} />
       <Route pexact ath="/signup" component={SignUp} />
       <Route exact path="/forgotPwd" component={ForgotPwd} />
       <Route exact path="/validateEmail/:token" component={ValidateEmail} />
-      <Route exact path="/profile" component={Profile} />
+
 
 
       </Switch>

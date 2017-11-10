@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import PlaceBidForm from './PlaceBidForm.js';
+import BidsContainer from '../containers/BidsContainer.js';
 
 class ProductDetails extends Component {
   static contextTypes = {
@@ -26,11 +28,16 @@ class ProductDetails extends Component {
       return <span />
     }
 
+    //const initialValues = {productId: product._id};
+
     return (
       <div className="container">
         <h3>{product.title}</h3>
         <h6>Categories: {product.categories}</h6>
         <p>{product.content}</p>
+        <BidsContainer
+          product={product}
+         />
       </div>
     );
   }
