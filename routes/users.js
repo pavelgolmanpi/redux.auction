@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var bcrypt = require('bcrypt');
+var bcryptjs = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var utils = require('../utils/index');
 var email = require('../utils/email');
@@ -116,7 +116,7 @@ router.post('/users/signin', function(req, res) {
       }
 
 
-      bcrypt.compare(req.body.password, user.password, function(err, valid) {
+      bcryptjs.compare(req.body.password, user.password, function(err, valid) {
         if (!valid) {
           return res.status(404).json({
             error: true,
@@ -154,7 +154,7 @@ router.post('/users/signup', function(req, res, next) {
       return res.status(403).json(err);
     }
 
-    var hash = bcrypt.hashSync(body.password.trim(), 10);
+    var hash = bcryptjs.hashSync(body.password.trim(), 10);
     var user = new User({
       name: body.name.trim(),
       username: body.username.trim(),
