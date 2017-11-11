@@ -133,7 +133,7 @@ router.post('/bids/validate', function(req, res, next) {
     }
     if (bid && bid.value >= value) {
       res.json({
-        value: 'You need place bid with value more than ' + value
+        value: 'You need place bid with value more than ' + bid.value
       });
     } else {
       return res.json({});

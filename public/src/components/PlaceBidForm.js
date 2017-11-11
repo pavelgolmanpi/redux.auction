@@ -54,9 +54,7 @@ class PlaceBidForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.newBid.bid && !nextProps.newBid.error) {
-      //this.props.fetchBidsForProduct(this.props.productId);
-    }
+
 
   }
 
@@ -77,8 +75,13 @@ class PlaceBidForm extends Component {
 
   render() {
     const {handleSubmit, submitting} = this.props;
-    //https://redux-form.com/7.1.2/docs/api/field.md/#usage
-//this.props.product._id
+
+    if(!this.props.authenticatedUser){
+      return (
+        <p style="color:red">You must be loggedin for place bids</p>
+      );
+    }
+
     return (
       <div>
          {this.getMessage() }
