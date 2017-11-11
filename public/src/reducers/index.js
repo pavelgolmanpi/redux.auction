@@ -4,7 +4,7 @@ import UserReducer from './reducer_user';
 import ValidateUserFieldsReducer from './reducer_validateUserFields';
 import ResendEmailReducer from './reducer_resendEmail';
 import UpdateEmailReducer from './reducer_updateEmail';
-import PlaceBidReducer from './reducer_placeBid';
+import BidsReducer from './reducer_bids';
 import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   form: formReducer, // <-- redux-form
   resendEmail: ResendEmailReducer,
   updateEmail: UpdateEmailReducer,
-  placeBid: PlaceBidReducer
+  bids: BidsReducer
 });
 
 export default rootReducer;

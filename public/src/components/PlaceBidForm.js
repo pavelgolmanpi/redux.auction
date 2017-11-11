@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import { placeBid, placeBidSuccess, placeBidFailure } from '../actions/placeBid';
-import { validatePlaceBid, validatePlaceBidSuccess, validatePlaceBidFailure } from '../actions/validatePlaceBid';
+import { placeBid, placeBidSuccess, placeBidFailure, resetPlaceBidState, validatePlaceBid, validatePlaceBidSuccess, validatePlaceBidFailure } from '../actions/bids';
 import renderField from './renderField';
 import renderHiddenField from './renderHiddenField'
 import { reduxForm, Field, SubmissionError } from 'redux-form';
@@ -21,12 +20,8 @@ function validate(values) {
 const asyncValidate = (values, dispatch) => {
   return dispatch(validatePlaceBid(values))
     .then((result) => {
-      if (!result.payload.response) {
-        return;
-      }
-
-      let {data, status} = result.payload.response;
-      if (status != 200 || data.username || data.email) {
+      let {data, status} = result.payload;
+      if (status != 200 || data.value) {
         dispatch(validatePlaceBidFailure(data));
         throw data;
       } else {
@@ -37,9 +32,9 @@ const asyncValidate = (values, dispatch) => {
 };
 
 const validateAndPlaceBid = (values, dispatch) => {
-
   return dispatch(placeBid(values, sessionStorage.getItem('jwtToken')))
     .then((result) => {
+
       if (result.payload.response && result.payload.response.status !== 200) {
         dispatch(placeBidFailure(result.payload.response.data));
         throw new SubmissionError(result.payload.response.data);
@@ -59,10 +54,8 @@ class PlaceBidForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('NEXT PROPS');
-    console.log(nextProps);
     if (nextProps.newBid.bid && !nextProps.newBid.error) {
-    console.log('!!!!!!!!');
+      //this.props.fetchBidsForProduct(this.props.productId);
     }
 
   }

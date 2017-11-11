@@ -16,23 +16,20 @@ bidSchema.plugin(timestamps);
 
 var Bid = mongoose.model('Bid', bidSchema);
 
-router.get('/bids/:productId', function(req, res, next) {
-  var body = req.body;
-  var productId = body.productId;
 
+router.get('/bids/:productId', function(req, res, next) {
   Bid
     .find({
-      productId: productId
+      productId: req.params.productId
     })
     .select({
-      value: 0,
       __v: 0,
       updatedAt: 0,
       createdAt: 0
     })
     .limit(100)
     .sort({
-      createdAt: -1
+      value: -1
     })
     .exec(function(err, bids) {
       if (err) {
@@ -127,7 +124,7 @@ router.post('/bids/validate', function(req, res, next) {
 
   Bid.findOne({
     productId: productId,
-  }).sort('value').exec(function(err, bid) {
+  }).sort('-value').exec(function(err, bid) {
     if (err) {
       console.log(err);
       return res.status(500).json({
@@ -136,7 +133,7 @@ router.post('/bids/validate', function(req, res, next) {
     }
     if (bid && bid.value >= value) {
       res.json({
-        title: 'You need place bid with value more than ' + value
+        value: 'You need place bid with value more than ' + value
       });
     } else {
       return res.json({});
